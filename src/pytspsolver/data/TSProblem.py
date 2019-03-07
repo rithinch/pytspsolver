@@ -1,4 +1,4 @@
-class TspInstance():
+class TSProblem():
   
   def __init__(self, cities=-1, edges=None):
     self.text = "Hello World"
