@@ -7,6 +7,9 @@ class TSProblem():
     else:
       self._cities = []
 
+  def get_cities(self):
+    return self._cities
+
   def print_cities_matrix(self):
 
     n = len(self._cities)
