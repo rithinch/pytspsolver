@@ -5,7 +5,6 @@ from time import time
 class ExhaustiveSearch():
   
   def __init__(self, time_limit=100):
-    self._results = []
     self._time = time_limit
   
   def cost(self, mx, path):
@@ -14,9 +13,12 @@ class ExhaustiveSearch():
         c += mx[a][b]
     return c
 
-  def run(self, tsp_problem):
+  def run(self, tsp_problem, time_limit=None):
 
-    best_path, best_cost, elapsed, time_cost = self.solve(tsp_problem.get_cities())
+    if time_limit == None:
+      time_limit = self._time
+
+    best_path, best_cost, elapsed, time_cost = self.solve(tsp_problem.get_cities(), time_limit)
 
     result = {
       'details': tsp_problem.get_details(), 
@@ -26,9 +28,9 @@ class ExhaustiveSearch():
       'time_vs_cost':time_cost
       }
 
-    self._results.append(result)
+    return result
 
-  def solve(self, mx):
+  def solve(self, mx, time_limit):
 
     n = len(mx)
     city_names = list(range(n))
@@ -52,7 +54,7 @@ class ExhaustiveSearch():
 
       time_cost.append((elapsed, best_cost))
 
-      if (self._time > -1) and (elapsed > self._time):
+      if (time_limit > -1) and (elapsed > time_limit):
         break
 
     return (best_path, best_cost, elapsed, time_cost)
