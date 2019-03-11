@@ -1,18 +1,14 @@
 class TSProblem():
   
-  def __init__(self, cities_mx=None):
-
-    if cities_mx:
-      self._cities = cities_mx
-    else:
-      self._cities = []
+  def __init__(self, cities_mx=[]):
+    self._cities = cities_mx
 
   def get_cities(self):
     return self._cities
   
   def get_details(self):
     pass
-
+    
   def __str__(self):
 
     n = len(self._cities)
