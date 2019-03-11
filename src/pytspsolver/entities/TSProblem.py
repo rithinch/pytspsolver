@@ -9,6 +9,9 @@ class TSProblem():
 
   def get_cities(self):
     return self._cities
+  
+  def get_details(self):
+    pass
 
   def __str__(self):
 
