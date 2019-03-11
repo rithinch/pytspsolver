@@ -10,17 +10,22 @@ class TSProblem():
   def get_cities(self):
     return self._cities
 
-  def print_cities_matrix(self):
+  def __str__(self):
 
     n = len(self._cities)
-    print("     ", end='')
+    
+    to_print = ""
+    
     for i in range(n):
-        print('{:3}'.format(i), end='')
-    print('\n    '+"----"*n)
+        to_print+= '{:3}'.format(i)
+    to_print+= '\n    '+"----"*n
+    
     for i in range(n):
-        print('{:2} | '.format(i), end='')
+        to_print+='{:2} | '.format(i)
         for j in range(n):
-            print('{:3}'.format(self._cities[i][j]), end='')
-        print()
+            to_print+='{:3}'.format(self._cities[i][j])
+        to_print+="\n"
+    
+    return to_print
 
 
