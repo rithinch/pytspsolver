@@ -6,6 +6,7 @@ class ExhaustiveSearch():
   
   def __init__(self, time_limit=100):
     self._time = time_limit
+    self._name = 'ExhaustiveSearch'
   
   def cost(self, mx, path):
     c = 0
@@ -21,6 +22,7 @@ class ExhaustiveSearch():
     best_path, best_cost, elapsed, time_cost = self.solve(tsp_problem.get_cities(), time_limit)
 
     result = {
+      'name': self._name,
       'details': tsp_problem.get_details(), 
       'best_path':best_path, 
       'cost':best_cost, 
