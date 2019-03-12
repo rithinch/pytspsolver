@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('PS')
 import matplotlib.pyplot as plt
 
 class Visualizer():
@@ -23,5 +25,8 @@ class Visualizer():
         y.append(result['time'])
       
       plt.plot(x, y, 'ro-')
+      plt.title("TSP Size (n) vs Time")
+      plt.xlabel("No of cities n")
+      plt.ylabel("Time Taken (s)")
       plt.show()
     
