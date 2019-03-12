@@ -1,7 +1,3 @@
-import matplotlib
-matplotlib.use('PS')
-import matplotlib.pyplot as plt
-
 class Visualizer():
 
   def __init__(self, results):
@@ -11,7 +7,7 @@ class Visualizer():
   def plot_time_vs_cost(self, epoch=0, name=''):
     pass
   
-  def plot_n_vs_time(self, epoch=0):
+  def plot_n_vs_time(self, plt, epoch=0):
 
     if epoch in self._results:
 
@@ -21,12 +17,11 @@ class Visualizer():
       y = []
 
       for result in results:
-        x.append(len(result['best_path']))
+        x.append(len(result['best_path'])-1)
         y.append(result['time'])
       
       plt.plot(x, y, 'ro-')
       plt.title("TSP Size (n) vs Time")
       plt.xlabel("No of cities n")
       plt.ylabel("Time Taken (s)")
-      plt.show()
     
