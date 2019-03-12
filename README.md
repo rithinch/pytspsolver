@@ -54,11 +54,10 @@ experiment = Experiment(problems)
 experiment.add_solver(ExhaustiveSearch(time_limit=50))
 experiment.add_solver(GreedySearch(time_limit=100))
 
-experiment.run(epoch=10) 
+results = experiment.run(epoch=10) 
 
 visualizer = Visualizer(results)
 visualizer.plot_n_vs_time(plt)
-
 plt.show()
  ```
  
