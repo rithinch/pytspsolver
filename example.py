@@ -23,5 +23,6 @@ experiment.add_solver(exhaustive_search)
 # Run the experiment desired number of times
 experiment.run(epoch=1) 
 
-# Get the results
-print(experiment.get_results()) 
+# Visualize results
+visualizer = Visualizer(experiment.get_results())
+ 
