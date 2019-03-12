@@ -59,8 +59,6 @@ class GreedySearch():
             cost += next_city_cost
 
         path.append(city_names[0])
-        print("path: " + str(path))
-        print("cost: " + str(cost))
 
         elapsed = time() - t
 
