@@ -13,11 +13,11 @@ class TSProblem():
 
     n = len(self._cities)
     
-    to_print = ""
+    to_print = "    "
     
     for i in range(n):
         to_print+= '{:3}'.format(i)
-    to_print+= '\n    '+"----"*n
+    to_print+= '\n    '+"----"*n+"\n"
     
     for i in range(n):
         to_print+='{:2} | '.format(i)
