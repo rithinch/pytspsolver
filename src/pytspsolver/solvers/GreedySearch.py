@@ -8,6 +8,8 @@ class GreedySearch():
         self._name = 'GreedySearch'
 
     def run(self, tsp_problem, time_limit=None):
+        """Function to run Greedy search algorithm for the provided TSP instance
+           Returns the path generated from the algorithm, including its cost and time taken"""
 
         if time_limit == None:
            time_limit = self._time
@@ -26,6 +28,7 @@ class GreedySearch():
         return result
 
     def solve(self, mx, time_limit=50):
+        """Executes the Greedy Search algorithm logic for the provided adjacency matrix"""
 
         n = len(mx)
         city_names = list(range(n)) # List of cities labelled [1,2,3,..,n]
@@ -34,10 +37,11 @@ class GreedySearch():
 
         t = time()
 
-        path = [city_names[0]]
+        path = [city_names[0]] # Start at city 0
 
         cost = 0
         
+        # Iterate over all cities that need to be visited
         for i in range(n-1):
 
             possible_next_cities = list(set(city_names) - set(path)) # List of unvisited cities
@@ -47,20 +51,26 @@ class GreedySearch():
             next_city_cost = oo
             next_city = -1
 
-            for index, city in enumerate(mx[current_city]):
+            # Iterate over cities to visit from current city
+            for index, city_cost in enumerate(mx[current_city]):
 
-                if (city != 0) and index in possible_next_cities:
+                # If the city is not itself and is unvisited
+                if (city_cost != 0) and index in possible_next_cities:
                     
-                    if city < next_city_cost:
-                        next_city_cost = city
+                    # If city cost is less than current best option
+                    if city_cost < next_city_cost:
+
+                        # Update next possible city and its cost
+                        next_city_cost = city_cost
                         next_city = index
 
+            # Update with resulting next city and cost
             path.append(next_city)
             cost += next_city_cost
 
-        path.append(city_names[0])
+        path.append(city_names[0]) # Add starting city to end as well
 
-        elapsed = time() - t
+        elapsed = time() - t # Record time taken
 
         time_cost.append((elapsed, cost))
 
