@@ -11,6 +11,12 @@ class Experiment():
   def add_solver(self, sovler):
     self._solvers.append(sovler)
   
+  def get_problem_names(self):
+    return [i.name for i in self._problems]
+  
+  def get_solver_names(self):
+    return [i._name for i in self._solvers]
+
   def get_results(self):
     return self._results
 
