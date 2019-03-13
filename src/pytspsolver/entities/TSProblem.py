@@ -1,7 +1,8 @@
 class TSProblem():
   
-  def __init__(self, cities_mx=[]):
+  def __init__(self, name, cities_mx=[]):
     self._cities = cities_mx
+    self.name = name
 
   def get_cities(self):
     return self._cities
