@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 #problem2 = create_random_problem(4) 
 #problem3 = create_random_problem(5)  
 
-problems = [create_random_problem(i) for i in range(3,12)]
+problems = [create_random_problem("Problem_"+str(i),i) for i in range(3,12)]
 
 # Initialize Solvers
 exhaustive_search = ExhaustiveSearch(time_limit=50)
