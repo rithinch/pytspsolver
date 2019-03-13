@@ -4,13 +4,13 @@
 
 Easy to use python package for rapid experimentation on the classic travelling salesman problem. Contains implementations of various optimization algorithms, cool visualizers and a plug-in architecture.
 
-## Installing (Direct)
+## Getting Started - Direct Install
 
 ```bash
 > pip install -i https://test.pypi.org/simple/ pytspsolver
 ```
 
-## Getting Started - Local Setup
+##  Local Setup (Development Purposes)
 
 Let's first create a new python environment with the name **your_env_name** using Anaconda Prompt/Terminal; this allows us to manage all package dependencies for this project in isolation. 
 
