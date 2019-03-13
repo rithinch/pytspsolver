@@ -46,7 +46,6 @@ Then, we need to install the ```pytspsolver``` package. Everytime a code change 
  Here's how you can kick-start a travelling salesman problem experiment:
  
  ```python
-# Import required classes and methods from the package
 from pytspsolver.entities import TSProblem
 from pytspsolver.experiments import Experiment
 from pytspsolver.solvers import *
@@ -74,11 +73,11 @@ results = experiment.run(epoch=10)
 # Set up Visualizer with experiment results
 visualizer = Visualizer(results)
 
-# Show visualizations
+# Show visualizations - automatically averages the results from different epochs
 visualizer.plot_n_vs_time_all(plt)
 plt.show()
 
-# Note: the visualizer object has many different plots available, they can be called in a similar fashion.
+# Note: the visualizer has various plots available, they can be called in a similar fashion.
  ```
  
  It comes with a plug in architecture, therefore it is very customizable.
