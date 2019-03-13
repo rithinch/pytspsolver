@@ -31,21 +31,19 @@ class Experiment():
 
     temp = {}
 
-    for epoch in range(epoch):
+    for e in range(epoch):
 
-      temp[epoch] = {}
+      temp[e] = {}
 
       for problem in self._problems:
 
-        if problem.name not in self._results[epoch]:
-
-          temp[epoch][problem.name] = {}
+        temp[e][problem.name] = {}
 
         for solver in self._solvers:
 
           result = solver.run(problem)
 
-          temp[epoch][problem.name][solver._name] = result
+          temp[e][problem.name][solver._name] = result
     
     self._results['epochs'] = temp
 

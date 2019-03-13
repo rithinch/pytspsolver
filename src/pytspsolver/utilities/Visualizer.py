@@ -42,4 +42,21 @@ class Visualizer():
     plt.title("Problem Size (n) vs Time - "+solverName)
     plt.xlabel("No of cities n")
     plt.ylabel("Time Taken (s)")
+  
+  def plot_n_vs_time_all(self, plt, epoch=-1):
+
+    data_points = {}
+
+    for solverName in self.__run_details['solver_names']:
+
+      data_points[solverName] = self.__get_n_vs_time_data(solverName, epoch=epoch)
+    
+    for solverName in self.__run_details['solver_names']:
+      plt.plot(data_points[solverName][0], data_points[solverName][1])
+    
+    plt.title("Problem Size (n) vs Time - All Solvers")
+    plt.xlabel("No of cities n")
+    plt.ylabel("Time Taken (s)")
+    plt.legend(self.__run_details['solver_names'], loc='upper left')
+
     

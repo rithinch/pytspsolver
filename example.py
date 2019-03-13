@@ -33,8 +33,10 @@ results = experiment.get_results()
 visualizer = Visualizer(results)
 
 # Show visualizations
-visualizer.plot_n_vs_time(plt, greedy_search._name)
-visualizer.plot_n_vs_time(plt, exhaustive_search._name)
+#visualizer.plot_n_vs_time(plt, greedy_search._name)
+#visualizer.plot_n_vs_time(plt, exhaustive_search._name)
+
+visualizer.plot_n_vs_time_all(plt)
 
 plt.show()
 
