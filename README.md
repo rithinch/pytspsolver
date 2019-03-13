@@ -46,25 +46,39 @@ Then, we need to install the ```pytspsolver``` package. Everytime a code change 
  Here's how you can kick-start a travelling salesman problem experiment:
  
  ```python
-
+# Import required classes and methods from the package
 from pytspsolver.entities import TSProblem
 from pytspsolver.experiments import Experiment
 from pytspsolver.solvers import *
 from pytspsolver.utilities import create_random_problem, Visualizer
 import matplotlib.pyplot as plt
 
-problems = [create_random_problem(i) for i in range(3,12)]
+# Create a few tsp problems (represented as an adjacency matrix)
+problem1 = create_random_problem("UniqueProblemName", 3)
+problems = [create_random_problem("ProblemName_"+str(i), i) for i in range(3,12)]
 
-experiment = Experiment(problems)
+# Create a new Experiment
+experiment = Experiment()
 
+# Add the problems to the experiment (single or list of problems)
+experiment.add_problem(problem1)
+experiment.add_problems(problems)
+
+# Add solvers to use in the experiment
 experiment.add_solver(ExhaustiveSearch(time_limit=50))
 experiment.add_solver(GreedySearch(time_limit=100))
 
+# Run the experiment desired number of times
 results = experiment.run(epoch=10) 
 
+# Set up Visualizer with experiment results
 visualizer = Visualizer(results)
-visualizer.plot_n_vs_time(plt)
+
+# Show visualizations
+visualizer.plot_n_vs_time_all(plt)
 plt.show()
+
+# Note: the visualizer object has many different plots available, they can be called in a similar fashion.
  ```
  
  It comes with a plug in architecture, therefore it is very customizable.
