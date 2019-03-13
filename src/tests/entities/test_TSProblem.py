@@ -3,7 +3,7 @@ from pytspsolver.entities import TSProblem
 
 class Test_TSProblem(object):
   
-  def test_init_shouldSucceedWithDefaultValues(self):
+  def test_TSProblem_Init_ShouldSucceedWithDefaultValues(self):
         
         name = 'Problem1'
 
