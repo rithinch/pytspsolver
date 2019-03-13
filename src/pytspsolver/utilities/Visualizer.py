@@ -12,14 +12,15 @@ class Visualizer():
 
     for epoch in self._results:
       results = self._results[epoch]
-      filtered_results[epoch] = []
+      x = []
+      y = []
       for prob in results:
-        x = []
-        y = []
         if solverName in results[prob]:
           result = results[prob][solverName]
           x.append(len(result['best_path'])-1)
           y.append(result['time'])
+        
+      filtered_results[epoch] = [x,y]
     
     if epoch>0:
       data_points = filtered_results[epoch]
