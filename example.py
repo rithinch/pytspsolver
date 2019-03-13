@@ -8,18 +8,20 @@ matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 
 # Create the problemw
-#problem1 = create_random_problem(3)
+problem1 = create_random_problem("TestProb",3)
 #problem2 = create_random_problem(4) 
 #problem3 = create_random_problem(5)  
 
-problems = [create_random_problem("Problem_"+str(i),i) for i in range(3,12)]
+problems = [create_random_problem("Problem_"+str(i),i) for i in range(3,10)]
 
 # Initialize Solvers
 exhaustive_search = ExhaustiveSearch(time_limit=50)
 greedy_search = GreedySearch()
 
 # Create Experiment
-experiment = Experiment(problems) 
+experiment = Experiment(problems)
+
+experiment.add_problem(problem1)
 
 # Add solvers to use in experiment
 experiment.add_solver(exhaustive_search)

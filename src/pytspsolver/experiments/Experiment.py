@@ -22,6 +22,8 @@ class Experiment():
 
   def run(self, epoch=5):
 
+    self._problems = sorted(self._problems, key=lambda x: len(x._cities))
+
     self._results = {}
 
     self._results['details'] = {
