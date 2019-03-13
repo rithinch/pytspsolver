@@ -24,24 +24,31 @@ class Experiment():
 
     self._results = {}
 
+    self._results['details'] = {
+      'problem_names':self.get_problem_names(),
+      'solver_names':self.get_solver_names()
+    }
+
+    temp = {}
+
     for epoch in range(epoch):
 
-      if epoch not in self._results:
-
-        self._results[epoch] = {}
+      temp[epoch] = {}
 
       for problem in self._problems:
 
         if problem.name not in self._results[epoch]:
 
-          self._results[epoch][problem.name] = {}
+          temp[epoch][problem.name] = {}
 
         for solver in self._solvers:
 
           result = solver.run(problem)
 
-          self._results[epoch][problem.name][solver._name] = result
+          temp[epoch][problem.name][solver._name] = result
     
+    self._results['epochs'] = temp
+
     return self._results
   
 

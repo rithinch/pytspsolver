@@ -4,7 +4,8 @@ class Visualizer():
 
   def __init__(self, results):
     
-    self._results = results
+    self.__run_details = results['details']
+    self._results = results['epochs']
   
   def __get_n_vs_time_data(self, solverName, epoch=-1):
 
