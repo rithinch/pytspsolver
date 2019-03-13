@@ -4,9 +4,9 @@ from time import time
 
 class ExhaustiveSearch():
   
-  def __init__(self, time_limit=100):
+  def __init__(self, name='Exhaustive Search', time_limit=100):
     self._time = time_limit
-    self._name = 'ExhaustiveSearch'
+    self._name = name
   
   def cost(self, mx, path):
     c = 0

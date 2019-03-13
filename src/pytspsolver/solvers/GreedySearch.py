@@ -3,9 +3,9 @@ from math import inf as oo
 
 class GreedySearch():
   
-    def __init__(self, time_limit=100):
+    def __init__(self, name='Greedy Search', time_limit=100):
         self._time = time_limit
-        self._name = 'GreedySearch'
+        self._name = name
 
     def run(self, tsp_problem, time_limit=None):
         """Function to run Greedy search algorithm for the provided TSP instance
