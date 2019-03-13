@@ -43,8 +43,8 @@ class Test_Experiment(object):
     exp = Experiment([], [])
 
     exp.run(epoch=epoch)
-
-    assert len(exp._results) == epoch
+    
+    assert len(exp._results['epochs']) == epoch
 
   
  
