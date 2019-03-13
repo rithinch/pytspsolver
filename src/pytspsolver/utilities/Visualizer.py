@@ -42,6 +42,7 @@ class Visualizer():
     plt.title("Problem Size (n) vs Time - "+solverName)
     plt.xlabel("No of cities n")
     plt.ylabel("Time Taken (s)")
+    plt.legend([solverName], loc='upper left')
   
   def plot_n_vs_time_all(self, plt, epoch=-1):
 
