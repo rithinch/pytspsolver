@@ -48,7 +48,39 @@ class Visualizer():
       datapoints = [list(avg_results[:,0]), list(avg_results[:,1])]
     
     return datapoints
+
   
+  def __get_solver_vs_cost_data(self, problemName, epoch=-1):
+    data = []
+
+    if epoch>-1:
+      for solver in self.__run_details['solver_names']:
+        data.append(self._results[epoch][problemName][solver]['cost'])
+    else:
+      for solver in self.__run_details['solver_names']:
+        avg=0
+        for epoch in self._results:
+          avg+=self._results[epoch][problemName][solver]['cost']
+        avg/=len(self._results)
+      
+        data.append(avg)
+
+    datapoints = [self.__run_details['solver_names'], data]
+    
+    return datapoints
+
+  
+  def plot_solver_vs_cost(self, plt, problemName, epoch=-1):
+
+    datapoints = self.__get_solver_vs_cost_data(problemName, epoch=epoch)
+    index = np.arange(len(datapoints[0]))
+    plt.bar(index, datapoints[1], width=0.7, edgecolor='blue')
+    plt.xlabel('Solvers')
+    plt.ylabel('Minimum Path Cost')
+    plt.xticks(index, datapoints[0], rotation=0)
+    plt.title('Comparision of Solvers by Min Cost')
+    plt.ylim(0, max(datapoints[1])*2)
+    
 
   def plot_time_vs_cost(self, plt, solverName, problemName, epoch=-1):
 
