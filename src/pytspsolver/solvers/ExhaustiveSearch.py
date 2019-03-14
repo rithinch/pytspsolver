@@ -1,12 +1,16 @@
 from itertools import permutations
 from math import inf as oo
 from time import time
+from .SolverBase import SolverBase
 
-class ExhaustiveSearch():
+class ExhaustiveSearch(SolverBase):
   
   def __init__(self, name='Exhaustive Search', time_limit=100):
+    
+    super().__init__(name)
+
     self._time = time_limit
-    self._name = name
+    
   
   def cost(self, mx, path):
     c = 0
@@ -14,10 +18,9 @@ class ExhaustiveSearch():
         c += mx[a][b]
     return c
 
-  def run(self, tsp_problem, time_limit=None):
+  def run(self, tsp_problem):
 
-    if time_limit == None:
-      time_limit = self._time
+    time_limit = self._time
 
     best_path, best_cost, elapsed, time_cost = self.solve(tsp_problem.get_cities(), time_limit)
 
