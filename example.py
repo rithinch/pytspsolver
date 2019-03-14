@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 #problem2 = create_random_problem(4) 
 problem3 = create_random_problem("Prob5",5)  
 
-problem3.visualize_problem(plt)
+problem3.visualize(plt)
 
 problems = [create_random_problem("Problem_"+str(i),i) for i in range(3,10)]
 

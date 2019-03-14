@@ -13,7 +13,7 @@ class TSProblem():
   def get_details(self):
     pass
 
-  def visualize_problem(self, plt, show=True):
+  def visualize(self, plt, show=True):
     G = nx.from_numpy_matrix((np.array(self._cities)))
     
     pos = nx.circular_layout(G)
