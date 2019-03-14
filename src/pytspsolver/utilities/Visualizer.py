@@ -58,11 +58,7 @@ class Visualizer():
         data.append(self._results[epoch][problemName][solver]['cost'])
     else:
       for solver in self.__run_details['solver_names']:
-        avg=0
-        for epoch in self._results:
-          avg+=self._results[epoch][problemName][solver]['cost']
-        avg/=len(self._results)
-      
+        avg=sum([self._results[epoch][problemName][solver]['cost'] for epoch in self._results])/len(self._results)
         data.append(avg)
 
     datapoints = [self.__run_details['solver_names'], data]
@@ -73,13 +69,21 @@ class Visualizer():
   def plot_solver_vs_cost(self, plt, problemName, epoch=-1):
 
     datapoints = self.__get_solver_vs_cost_data(problemName, epoch=epoch)
+    
     index = np.arange(len(datapoints[0]))
+    
     plt.bar(index, datapoints[1], width=0.7, edgecolor='blue')
+
+    for i, v in enumerate(datapoints[1]):
+      plt.text(i-.05, v+(0.05*v), " "+str(v), color='blue', va='center', fontweight='bold')
+
     plt.xlabel('Solvers')
     plt.ylabel('Minimum Path Cost')
     plt.xticks(index, datapoints[0], rotation=0)
-    plt.title('Comparision of Solvers by Min Cost')
+    plt.title('Comparision of Solvers by Min Cost - '+problemName)
     plt.ylim(0, max(datapoints[1])*2)
+
+    plt.show()
     
 
   def plot_time_vs_cost(self, plt, solverName, problemName, epoch=-1):
@@ -92,6 +96,8 @@ class Visualizer():
     plt.xlabel("Time Taken (s)")
     plt.ylabel("Path Cost (units)")
     plt.legend([solverName, 'Minimum Cost'], loc='upper right')
+
+    plt.show()
   
 
   def plot_time_vs_cost_all(self, plt, problemName, epoch=-1):
@@ -111,8 +117,9 @@ class Visualizer():
     plt.xlabel("Time Taken (s)")
     plt.ylabel("Path Cost (units)")
 
-    
     plt.legend(legend, loc='upper right')
+
+    plt.show()
 
 
   def plot_n_vs_time(self, plt, solverName, epoch=-1):
@@ -124,6 +131,8 @@ class Visualizer():
     plt.xlabel("No of cities n")
     plt.ylabel("Time Taken (s)")
     plt.legend([solverName], loc='upper left')
+
+    plt.show()
   
 
   def plot_n_vs_time_all(self, plt, epoch=-1):
@@ -135,12 +144,13 @@ class Visualizer():
       data_points[solverName] = self.__get_n_vs_time_data(solverName, epoch=epoch)
     
     for solverName in self.__run_details['solver_names']:
-      print(data_points[solverName][0][-1], data_points[solverName][1][-1])
       plt.plot(data_points[solverName][0], data_points[solverName][1])
 
     plt.title("Problem Size (n) vs Time - All Solvers")
     plt.xlabel("No of cities n")
     plt.ylabel("Time Taken (s)")
     plt.legend(self.__run_details['solver_names'], loc='upper left')
+
+    plt.show()
 
     

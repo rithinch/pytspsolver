@@ -42,5 +42,4 @@ visualizer = Visualizer(results)
 #visualizer.plot_time_vs_cost_all(plt, 'Problem_9')
 #visualizer.plot_time_vs_cost(plt, exhaustive_search._name, 'Problem_9')
 visualizer.plot_solver_vs_cost(plt, 'Problem_9')
-plt.show()
 
