@@ -89,13 +89,26 @@ class Visualizer():
   def plot_time_vs_cost(self, plt, solverName, problemName, epoch=-1):
 
     datapoints = self.__get_time_vs_cost_data(problemName, solverName, epoch=epoch)
+    
+    init_x, init_y = datapoints[0][0], datapoints[1][0]
+    min_x, min_y = datapoints[0][-1], datapoints[1][-1]
+    
+    point_label = "({0:.2f},{1:.2f})"
 
     plt.plot(datapoints[0], datapoints[1])
-    plt.plot(datapoints[0][-1], datapoints[1][-1], '^')
+    
+    
+    for x,y in [(init_x, init_y), (min_x, min_y)]:
+      plt.plot(x, y, '^')
+      plt.text(x-(0.05*x), y+(0.05*y),point_label.format(x, y), color='blue', va='center', fontweight='bold')
+    
+    plt.xlim(-0.005, min_x+(0.25*min_x))
+    plt.ylim(0, init_y+(0.25*init_y))
+
     plt.title("Time (s) vs Cost - "+problemName)
     plt.xlabel("Time Taken (s)")
     plt.ylabel("Path Cost (units)")
-    plt.legend([solverName, 'Minimum Cost'], loc='upper right')
+    plt.legend([solverName, "Final Cost"], loc='upper right')
 
     plt.show()
   
