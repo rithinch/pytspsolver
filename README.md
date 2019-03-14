@@ -75,7 +75,6 @@ visualizer = Visualizer(results)
 
 # Show visualizations - automatically averages the results from different epochs
 visualizer.plot_n_vs_time_all(plt)
-plt.show()
 
 # Note: the visualizer has various plots available, they can be called in a similar fashion.
  ```
