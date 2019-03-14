@@ -28,7 +28,7 @@ experiment.add_solver(exhaustive_search)
 experiment.add_solver(greedy_search)
 
 # Run the experiment desired number of times
-experiment.run(epoch=1) 
+experiment.run(epoch=2) 
 results = experiment.get_results()
 
 # Set up Visualizer with experiment results
@@ -38,7 +38,8 @@ visualizer = Visualizer(results)
 #visualizer.plot_n_vs_time(plt, greedy_search._name)
 #visualizer.plot_n_vs_time(plt, exhaustive_search._name)
 
-visualizer.plot_n_vs_time_all(plt)
-
+#visualizer.plot_n_vs_time_all(plt)
+visualizer.plot_time_vs_cost_all(plt, 'Problem_9')
+#visualizer.plot_time_vs_cost(plt, exhaustive_search._name, 'Problem_9')
 plt.show()
 

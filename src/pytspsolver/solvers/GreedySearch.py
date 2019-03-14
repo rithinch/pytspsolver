@@ -68,11 +68,16 @@ class GreedySearch():
             path.append(next_city)
             cost += next_city_cost
 
+            elapsed = time() - t # Record time taken
+            time_cost.append((elapsed, cost))
+
+        cost+=mx[path[-1]][0] #Add cost to go back
+        elapsed = time() - t # Record time taken
+        time_cost.append((elapsed, cost))
+        
         path.append(city_names[0]) # Add starting city to end as well
 
-        elapsed = time() - t # Record time taken
-
-        time_cost.append((elapsed, cost))
+        
 
         return (path, cost, elapsed, time_cost)
 
