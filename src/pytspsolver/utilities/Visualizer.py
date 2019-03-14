@@ -66,16 +66,66 @@ class Visualizer():
     return datapoints
 
   
+  def __get_problem_vs_cost_data(self, epoch=-1):
+
+    data = []
+
+    for problem in self.__run_details['problem_names']:
+      data.append(self.__get_solver_vs_cost_data(problem))
+    
+    d = np.array(data)
+
+    solver_results = np.transpose(d[:,1])
+
+    solver_names = d[0,0]
+
+    return [self.__run_details['problem_names'], solver_names, solver_results.astype(np.float)]
+
+
+  def plot_problem_vs_cost_all(self, plt, epoch=-1):
+    
+    datapoints = self.__get_problem_vs_cost_data(epoch=epoch)
+    problem_names = datapoints[0]
+    solver_names = datapoints[1]
+    solver_results = datapoints[2]
+
+    n_groups = len(problem_names)
+    index = np.arange(n_groups)
+
+    bar_width = 0.35
+    opacity = 0.8
+
+    fig, ax = plt.subplots()
+
+    for i in range(len(solver_names)):
+      rects = ax.bar(index+(i*bar_width), solver_results[i], bar_width,alpha=opacity,label=solver_names[i])
+      for rect in rects:
+        height = rect.get_height()
+        ax.text(rect.get_x() + rect.get_width()*0.5, 1.02*height,
+                '{}'.format(height), color='blue', ha='center', va='center', fontweight='bold')
+    
+    ax.set_ylabel('Cost')
+    ax.set_xlabel('Problems')
+    ax.set_title('Cost Comparision - All Solvers and Problems')
+    ax.set_xticks(index + bar_width/len(solver_names))
+    ax.set_xticklabels(problem_names)
+    ax.legend()
+
+    plt.show()
+
+
   def plot_solver_vs_cost(self, plt, problemName, epoch=-1):
 
     datapoints = self.__get_solver_vs_cost_data(problemName, epoch=epoch)
     
     index = np.arange(len(datapoints[0]))
     
-    plt.bar(index, datapoints[1], width=0.7, edgecolor='blue')
+    rects = plt.bar(index, datapoints[1], width=0.7, edgecolor='blue')
 
-    for i, v in enumerate(datapoints[1]):
-      plt.text(i-.05, v+(0.05*v), " "+str(v), color='blue', va='center', fontweight='bold')
+    for rect in rects:
+      height = rect.get_height()
+      plt.text(rect.get_x() + rect.get_width()*0.5, 1.05*height,
+              '{}'.format(height), color='blue', ha='center', va='center', fontweight='bold')
 
     plt.xlabel('Solvers')
     plt.ylabel('Minimum Path Cost')
@@ -105,10 +155,10 @@ class Visualizer():
     plt.xlim(-0.005, min_x+(0.25*min_x))
     plt.ylim(0, init_y+(0.25*init_y))
 
-    plt.title("Time (s) vs Cost - "+problemName)
+    plt.title("Time (s) vs Cost - {0} - {1}".format(solverName, problemName))
     plt.xlabel("Time Taken (s)")
     plt.ylabel("Path Cost (units)")
-    plt.legend([solverName, "Final Cost"], loc='upper right')
+    plt.legend([solverName, "Initial Cost", "Final Cost"], loc='upper right')
 
     plt.show()
   

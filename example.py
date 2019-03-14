@@ -8,7 +8,7 @@ matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 
 # Create the problemw
-problem1 = create_random_problem("TestProb",3)
+#problem1 = create_random_problem("TestProb",3)
 #problem2 = create_random_problem(4) 
 #problem3 = create_random_problem(5)  
 
@@ -21,7 +21,7 @@ greedy_search = GreedySearch()
 # Create Experiment
 experiment = Experiment(problems)
 
-experiment.add_problem(problem1)
+#experiment.add_problem(problem1)
 
 # Add solvers to use in experiment
 experiment.add_solver(exhaustive_search)
@@ -35,11 +35,12 @@ results = experiment.get_results()
 visualizer = Visualizer(results)
 
 # Show visualizations
+
 #visualizer.plot_n_vs_time(plt, greedy_search._name)
 #visualizer.plot_n_vs_time(plt, exhaustive_search._name)
 
 #visualizer.plot_n_vs_time_all(plt)
-visualizer.plot_time_vs_cost_all(plt, 'Problem_9')
-#visualizer.plot_time_vs_cost(plt, exhaustive_search._name, 'Problem_9')
+#visualizer.plot_time_vs_cost_all(plt, 'Problem_9')
+visualizer.plot_time_vs_cost(plt, exhaustive_search._name, 'Problem_9')
 #visualizer.plot_solver_vs_cost(plt, 'Problem_9')
-
+#visualizer.plot_problem_vs_cost_all(plt)
