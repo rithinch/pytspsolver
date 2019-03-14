@@ -1,14 +1,35 @@
+import networkx as nx
+import numpy as np
+
 class TSProblem():
   
   def __init__(self, name, cities_mx=[]):
     self._cities = cities_mx
     self.name = name
+    self.networkx_graph = nx.from_numpy_matrix((np.array(self._cities)))
 
   def get_cities(self):
     return self._cities
   
   def get_details(self):
     pass
+
+  def visualize_problem(self, plt, show=True):
+    G = self.networkx_graph
+    
+    pos = nx.circular_layout(G)
+    
+    nx.draw_networkx(G, pos=pos, with_labels=True)
+    
+    labels = nx.get_edge_attributes(G,'weight')
+    
+    nx.draw_networkx_edge_labels(G, pos=pos, edge_labels=labels)
+    
+    plt.title("{0} - Visualization".format(self.name))
+    plt.axis('off')
+
+    if show:
+      plt.show()
     
   def __str__(self):
 

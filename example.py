@@ -7,10 +7,12 @@ import matplotlib
 matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 
-# Create the problemw
+# Create the problems
 #problem1 = create_random_problem("TestProb",3)
 #problem2 = create_random_problem(4) 
-#problem3 = create_random_problem(5)  
+problem3 = create_random_problem("Prob5",5)  
+
+problem3.visualize_problem(plt)
 
 problems = [create_random_problem("Problem_"+str(i),i) for i in range(3,10)]
 
@@ -41,6 +43,6 @@ visualizer = Visualizer(results)
 
 #visualizer.plot_n_vs_time_all(plt)
 #visualizer.plot_time_vs_cost_all(plt, 'Problem_9')
-visualizer.plot_time_vs_cost(plt, exhaustive_search._name, 'Problem_9')
+#visualizer.plot_time_vs_cost(plt, exhaustive_search._name, 'Problem_9')
 #visualizer.plot_solver_vs_cost(plt, 'Problem_9')
 #visualizer.plot_problem_vs_cost_all(plt)
