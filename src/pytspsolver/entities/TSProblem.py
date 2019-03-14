@@ -6,7 +6,6 @@ class TSProblem():
   def __init__(self, name, cities_mx=[]):
     self._cities = cities_mx
     self.name = name
-    self.networkx_graph = nx.from_numpy_matrix((np.array(self._cities)))
 
   def get_cities(self):
     return self._cities
@@ -15,7 +14,7 @@ class TSProblem():
     pass
 
   def visualize_problem(self, plt, show=True):
-    G = self.networkx_graph
+    G = nx.from_numpy_matrix((np.array(self._cities)))
     
     pos = nx.circular_layout(G)
     
