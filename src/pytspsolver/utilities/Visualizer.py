@@ -117,15 +117,36 @@ class Visualizer():
 
     data_points = {}
     legend = []
+    point_label = "({0:.5f},{1:.2f})"
+    xlim, ylim = 0, 0
+
     for solverName in self.__run_details['solver_names']:
       data_points[solverName] = self.__get_time_vs_cost_data(problemName, solverName, epoch=epoch)
     
     for solverName in self.__run_details['solver_names']:
       legend.append(solverName)
-      legend.append("Minimum Cost - "+solverName)
+      legend.append("Initial Cost - "+solverName)
+      legend.append("Final Cost - "+solverName)
+
       plt.plot(data_points[solverName][0], data_points[solverName][1])
-      plt.plot(data_points[solverName][0][-1], data_points[solverName][1][-1], '^')
+
+      init_x, init_y = data_points[solverName][0][0], data_points[solverName][1][0]
+      min_x, min_y = data_points[solverName][0][-1], data_points[solverName][1][-1]
+
+      for x,y in [(init_x, init_y), (min_x, min_y)]:
+        plt.plot(x, y, 'o')
+        
+        plt.text(x-(0.05*x), y+(0.05*y),point_label.format(x, y), color='blue', va='center')
+
+      if init_y > ylim:
+        ylim = init_y
+      
+      if min_x > xlim:
+        xlim = min_x
     
+    plt.xlim(-0.005, xlim+(0.25*xlim))
+    plt.ylim(0, ylim+(0.5*ylim))
+
     plt.title("Time (s) vs Cost - All Solvers for "+problemName)
     plt.xlabel("Time Taken (s)")
     plt.ylabel("Path Cost (units)")
