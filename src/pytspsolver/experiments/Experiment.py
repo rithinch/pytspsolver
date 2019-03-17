@@ -7,6 +7,9 @@ class Experiment():
 
   def add_problem(self, problem):
     self._problems.append(problem)
+
+  def add_problems(self, problems):
+    self._problems.extend(problems)
     
   def add_solver(self, sovler):
     self._solvers.append(sovler)

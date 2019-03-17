@@ -25,6 +25,15 @@ class Test_Experiment(object):
     exp.add_problem(1)
 
     assert len(exp._problems) == count+1
+  
+  def test_Experiment_add_problems_ShouldSucceed(self):
+
+    exp = Experiment([])
+    count = len(exp._problems)
+
+    exp.add_problems([1,2,3])
+
+    assert len(exp._problems) == count+3
 
   def test_Experiment_add_solver_ShouldSucceed(self):
 
