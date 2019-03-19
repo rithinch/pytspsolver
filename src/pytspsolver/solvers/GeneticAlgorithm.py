@@ -4,19 +4,32 @@ import random
 
 class GeneticAlgorithm(SolverBase):
 
-    def __init__(self, name="Genetic Algorithm", generations=1000, mutation_rate=0.5, population_size=100, elite_size=20):
+    def __init__(self, name="Genetic Algorithm", generations=1000, mutation_rate=0.05, population_size=100, elite_size=20):
         super().__init__(name)
         self.__generations = generations
         self.__mutation_rate = mutation_rate
         self.__population_size = population_size
         self.__elite_size = elite_size
 
-    def __calc_fitness(self, mx, path):
+    def __breedPopulation(self, parents):
+        
+        children = []
+        
+        for parent1, parent2 in parents:
+            child = self.__crossover(parent1, parent2)
+            children.append(child)
+        
+        return children
+
+    def __cost(self, mx, path):
         c = 0
         for a,b in zip([0]+path, path+[0]):
             c += mx[a][b]
         return c
     
+    def __calc_fitness(self, mx, path):
+        return 1/float(self.__cost(mx, path))
+
     def __create_initial_population(self, prob_size):
         
         population = []
@@ -28,16 +41,49 @@ class GeneticAlgorithm(SolverBase):
 
         return population
     
+    def __crossover(self, parent1, parent2):
+
+        child = []
+        childP1 = []
+        childP2 = []
+
+        geneA = int(random.random() * len(parent1))
+        geneB = int(random.random() * len(parent1))
+    
+        startGene = min(geneA, geneB)
+        endGene = max(geneA, geneB)
+
+        for i in range(startGene, endGene):
+            childP1.append(parent1[i])
+        
+        childP2 = [item for item in parent2 if item not in childP1]
+
+        child = childP1 + childP2
+        return child
+    
     def __get_best(self, mx, population):
         
         best_path = self.__rank_population(mx, population)[0]
-        best_cost = self.__calc_fitness(mx, best_path)
+        best_cost = self.__cost(mx, best_path)
 
         return best_path, best_cost
     
-    def __next_generation(self, population):
+    def __mutatePopulation(self, population):
 
-        return population
+        mutatedPop = []
+    
+        for ind in range(0, len(population)):
+            mutatedInd = self.__swap_mutation(population[ind])
+            mutatedPop.append(mutatedInd)
+
+        return mutatedPop
+
+    def __next_generation(self, mx, population):
+        popRanked = self.__rank_population(mx, population)
+        selectionResults = self.__tournament_selection(mx, popRanked)
+        children = self.__breedPopulation(selectionResults)
+        nextGeneration = self.__mutatePopulation(children)
+        return nextGeneration
 
     def __rank_population(self, mx, population):
         return sorted(population, key=lambda x: self.__calc_fitness(mx, x), reverse=True)
@@ -109,7 +155,7 @@ class GeneticAlgorithm(SolverBase):
 
         while generation < self.__generations:
             
-            population = self.__next_generation(population)
+            population = self.__next_generation(cities_mx, population)
             generation+=1
             
             best_path, best_cost = self.__get_best(cities_mx, population)
@@ -119,7 +165,7 @@ class GeneticAlgorithm(SolverBase):
         return best_path, best_cost, elapsed, time_cost
 
     def __swap_mutation(self,individual):
-        
+
         for swapped in range(len(individual)):
 
             if(random.random() < self.__mutation_rate):
@@ -133,7 +179,7 @@ class GeneticAlgorithm(SolverBase):
 
         return individual
 
-    def __tournament_selection(self, population):
+    def __tournament_selection(self, mx, population):
         """
         Function to select some 'good' parents from the population using tournament selection.
         This implementation selection n pairs of parents, where n = population size // 2
