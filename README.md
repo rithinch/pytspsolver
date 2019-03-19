@@ -16,35 +16,6 @@ Easy to use package for rapid experimentation on the classic travelling salesman
 > pip install -i https://test.pypi.org/simple/ pytspsolver
 ```
 
-##  Local Setup (Development Purposes)
-
-Let's first create a new python environment with the name **your_env_name** using Anaconda Prompt/Terminal; this allows us to manage all package dependencies for this project in isolation. 
-
-```bash
-> conda create -n your_env_name
-```
-
-We can now activate the created environment using the command below:
-
-```bash
-> conda activate your_env_name
-```
-
-We need to install a few dependencies. We can do this by running the following:
-
-```bash
-> conda install jupyter
-> pip install -r ./src/requirements.txt
-```
-
-Then, we need to install the ```pytspsolver``` package. Everytime a code change is made to the package, this needs to be called. Otherwise newly added changes wouldn't reflect in places where this package is being used. 
-
-```bash
-> pip install ./src
-```
-
- That's it, we're good to start using the package now! 👏
- 
  ## Usage
  
  This package is designed to provide an intutive pythonic interface; allowing you to conduct experiments with minimal code. 😅
@@ -84,6 +55,36 @@ visualizer.plot_n_vs_time_all(plt)
  ```
  
  It comes with a plug in architecture, therefore it is very customizable.
+
+##  Local Setup (Development Purposes)
+
+Let's first create a new python environment with the name **your_env_name** using Anaconda Prompt/Terminal; this allows us to manage all package dependencies for this project in isolation. 
+
+```bash
+> conda create -n your_env_name
+```
+
+We can now activate the created environment using the command below:
+
+```bash
+> conda activate your_env_name
+```
+
+We need to install a few dependencies. We can do this by running the following:
+
+```bash
+> conda install jupyter
+> pip install -r ./src/requirements.txt
+```
+
+Then, we need to install the ```pytspsolver``` package. Everytime a code change is made to the package, this needs to be called. Otherwise newly added changes wouldn't reflect in places where this package is being used. 
+
+```bash
+> pip install ./src
+```
+
+ That's it, we're good to start using the package now! 👏
+ 
  
  ## Additional Examples
 
