@@ -94,3 +94,12 @@ A few examples have been implemented using jupyter notebooks; found in the **exa
 ```
 
 👉 Make sure you are in the right environment when launching jupyter notebook, otherwise, jupyter notebook kernel will be pointing to a different python version which won't have ```pytspsolver``` package installed.
+
+## Contributors
+
+* [Venkata Rithin Chalumuri](https://github.coventry.ac.uk/chalumuv)
+* [Genaro Bedenko](https://github.coventry.ac.uk/bedenkog)
+* [Ovidiu Mitroi](https://github.coventry.ac.uk/mitroio)
+* [Rishi Mehangra](https://github.coventry.ac.uk/mehangrr)
+
+
