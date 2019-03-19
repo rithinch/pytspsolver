@@ -59,14 +59,12 @@ from pytspsolver.utilities import create_random_problem, Visualizer
 import matplotlib.pyplot as plt
 
 # Create a few tsp problems (represented as an adjacency matrix)
-problem1 = create_random_problem("UniqueProblemName", 3)
-problems = [create_random_problem("ProblemName_"+str(i), i) for i in range(3,12)]
+problems = [create_random_problem("UniqueProblemName"+str(i), i) for i in range(3,12)]
 
 # Create a new Experiment
 experiment = Experiment()
 
 # Add the problems to the experiment (single or list of problems)
-experiment.add_problem(problem1)
 experiment.add_problems(problems)
 
 # Add solvers to use in the experiment
