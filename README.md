@@ -58,6 +58,8 @@ visualizer.plot_n_vs_time_all(plt)
 
 ##  Local Setup (Development Purposes)
 
+Contributions and pull requests are encouraged! 👏
+
 Let's first create a new python environment with the name **your_env_name** using Anaconda Prompt/Terminal; this allows us to manage all package dependencies for this project in isolation. 
 
 ```bash
@@ -83,8 +85,7 @@ Then, we need to install the ```pytspsolver``` package. Everytime a code change 
 > pip install ./src
 ```
 
- That's it, we're good to start using the package now! 👏
- 
+ That's it, we're good to start developing now. :sunglasses:
  
  ## Additional Examples
 
