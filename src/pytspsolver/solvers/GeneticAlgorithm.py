@@ -118,6 +118,21 @@ class GeneticAlgorithm(SolverBase):
 
         return best_path, best_cost, elapsed, time_cost
 
+    def __swap_mutation(self,individual):
+        
+        for swapped in range(len(individual)):
+
+            if(random.random() < self.__mutation_rate):
+                swapWith = int(random.random() * len(individual))
+                
+                city1 = individual[swapped]
+                city2 = individual[swapWith]
+                
+                individual[swapped] = city2
+                individual[swapWith] = city1
+
+        return individual
+
     def __tournament_selection(self, population):
         """
         Function to select some 'good' parents from the population using tournament selection.
