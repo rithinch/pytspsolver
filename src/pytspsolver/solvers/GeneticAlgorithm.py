@@ -4,13 +4,14 @@ import random
 
 class GeneticAlgorithm(SolverBase):
 
-    def __init__(self, name="Genetic Algorithm", generations=500, mutation_rate=0.05, population_size=100, elite_size=20):
+    def __init__(self, name="Genetic Algorithm", generations=500, mutation_rate=0.05, population_size=100, elite_size=20, selection_operator='roulette'):
         super().__init__(name)
         self.__generations = generations
         self.__mutation_rate = mutation_rate
         self.__population_size = population_size
         self.__elite_size = elite_size
 
+        self.__selection = self.__roulette_wheel_selection if selection_operator == 'roulette' else self.__tournament_selection
         self.__cost_cache = {}
 
     def __breedPopulation(self, parents):
@@ -166,10 +167,7 @@ class GeneticAlgorithm(SolverBase):
         
         t = time()
 
-        prev=0
-        convergence_count = 0
-
-        while (generation < self.__generations) or (convergence_count<10):
+        while (generation < self.__generations):
             
             population = self.__next_generation(cities_mx, population)
             generation+=1
@@ -178,11 +176,6 @@ class GeneticAlgorithm(SolverBase):
 
             elapsed = time() - t
             time_cost.append((elapsed, best_cost))
-
-            if (prev == best_cost):
-                convergence_count+=1
-            else:
-                prev=best_cost
 
         return best_path, best_cost, elapsed, time_cost
 
