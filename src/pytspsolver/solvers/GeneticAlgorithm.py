@@ -11,6 +11,8 @@ class GeneticAlgorithm(SolverBase):
         self.__population_size = population_size
         self.__elite_size = elite_size
 
+        self.__cost_cache = {}
+
     def __breedPopulation(self, parents):
         
         children = []
@@ -22,9 +24,19 @@ class GeneticAlgorithm(SolverBase):
         return children
 
     def __cost(self, mx, path):
+        
+        x = tuple(path)
+        
+        if x in self.__cost_cache:
+            return self.__cost_cache[x]
+        
         c = 0
+
         for a,b in zip([0]+path, path+[0]):
             c += mx[a][b]
+        
+        self.__cost_cache[x] = c
+        
         return c
     
     def __calc_fitness(self, mx, path):
@@ -105,7 +117,7 @@ class GeneticAlgorithm(SolverBase):
 
         total_fitness = sum([self.__calc_fitness(mx,sol) for sol in population])
 
-        while len(selectedPop) < (self.__population_size//2):
+        while len(selectedPop) < (self.__population_size):
 
             pick1 = random.uniform(0,total_fitness)
             pick2 = random.uniform(0,total_fitness)
@@ -183,7 +195,7 @@ class GeneticAlgorithm(SolverBase):
     def __tournament_selection(self, mx, population):
         """
         Function to select some 'good' parents from the population using tournament selection.
-        This implementation selection n pairs of parents, where n = population size // 2
+        This implementation selection n pairs of parents, where n = population size
         Parameters:
             population (list) - list of solutions.
             popSize (int) - population size.
@@ -194,7 +206,7 @@ class GeneticAlgorithm(SolverBase):
         selectedPop = []
 
         #Until fill the selectedPop upto the size we want
-        while len(selectedPop) < (self.__population_size//2):
+        while len(selectedPop) < (self.__population_size):
 
             #Select 4 parents
             player1 = random.choice(population)
