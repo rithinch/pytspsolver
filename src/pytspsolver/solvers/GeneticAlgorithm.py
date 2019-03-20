@@ -95,7 +95,7 @@ class GeneticAlgorithm(SolverBase):
         popRanked = self.__rank_population(mx, population)
         mating_pool = self.__tournament_selection(mx, popRanked)
         children = self.__breedPopulation(mating_pool)
-        newPopulation =  random.sample(children, self.__population_size - self.__elite_size)
+        newPopulation =  self.__rank_population(mx, children)[:self.__population_size - self.__elite_size]
         nextGeneration = popRanked[:self.__elite_size] + self.__mutatePopulation(newPopulation)
         return nextGeneration
 
