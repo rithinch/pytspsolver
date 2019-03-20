@@ -4,7 +4,7 @@ import random
 
 class GeneticAlgorithm(SolverBase):
 
-    def __init__(self, name="Genetic Algorithm", generations=1000, mutation_rate=0.05, population_size=100, elite_size=20):
+    def __init__(self, name="Genetic Algorithm", generations=500, mutation_rate=0.05, population_size=100, elite_size=20):
         super().__init__(name)
         self.__generations = generations
         self.__mutation_rate = mutation_rate
@@ -32,11 +32,11 @@ class GeneticAlgorithm(SolverBase):
         
         c = 0
 
-        for a,b in zip([0]+path, path+[0]):
+        for a,b in zip([0]+path[1:], path[1:]+[0]):
             c += mx[a][b]
         
         self.__cost_cache[x] = c
-        
+
         return c
     
     def __calc_fitness(self, mx, path):
@@ -48,7 +48,7 @@ class GeneticAlgorithm(SolverBase):
 
         for i in range(self.__population_size):
 
-            pop = random.sample(range(prob_size), prob_size)
+            pop = [0] + random.sample(range(1, prob_size), prob_size-1) + [0]
             population.append(pop)
 
         return population
@@ -166,14 +166,23 @@ class GeneticAlgorithm(SolverBase):
         
         t = time()
 
-        while generation < self.__generations:
+        prev=0
+        convergence_count = 0
+
+        while (generation < self.__generations) or (convergence_count<10):
             
             population = self.__next_generation(cities_mx, population)
             generation+=1
             
             best_path, best_cost = self.__get_best(cities_mx, population)
+
             elapsed = time() - t
             time_cost.append((elapsed, best_cost))
+
+            if (prev == best_cost):
+                convergence_count+=1
+            else:
+                prev=best_cost
 
         return best_path, best_cost, elapsed, time_cost
 
