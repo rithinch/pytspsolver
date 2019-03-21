@@ -217,13 +217,13 @@ class GeneticAlgorithm(SolverBase):
             player4 = random.choice(population)
 
             #Pick the winner of player 1 and 2 to be parent1.
-            if player1 < player2:
+            if self.__cost(mx, player1) < self.__cost(mx, player2):
                 parent1 = player1
             else:
                 parent1 = player2
 
             #Pick the winner of player 3 and 4 to be parent2.
-            if player3 < player4:
+            if self.__cost(mx, player3) < self.__cost(mx, player4):
                 parent2 = player3
             else:
                 parent2 = player4
