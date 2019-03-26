@@ -1,9 +1,9 @@
 class Experiment():
 
-  def __init__(self, problems=[], solvers=[]):
+  def __init__(self, problems=None, solvers=None):
     self._results = {}
-    self._problems = problems
-    self._solvers = solvers
+    self._problems = problems if problems != None else []
+    self._solvers = solvers if solvers != None else []
 
   def add_problem(self, problem):
     self._problems.append(problem)

@@ -42,7 +42,7 @@ class Test_Experiment(object):
 
     exp.add_solver(1)
 
-    assert len(exp._problems) == count+1
+    assert len(exp._solvers) == count+1
   
   
   def test_Experiment_run_ShouldSucceed(self):
