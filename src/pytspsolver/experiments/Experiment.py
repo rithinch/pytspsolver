@@ -19,6 +19,15 @@ class Experiment():
   
   def get_solver_names(self):
     return [i._name for i in self._solvers]
+  
+  def get_problem_sizes(self):
+    
+    d = {}
+
+    for problem in self._problems:
+      d[problem.name] = problem.size
+    
+    return d
 
   def get_results(self):
     return self._results
@@ -31,7 +40,8 @@ class Experiment():
 
     self._results['details'] = {
       'problem_names':self.get_problem_names(),
-      'solver_names':self.get_solver_names()
+      'solver_names':self.get_solver_names(),
+      'problem_sizes':self.get_problem_sizes()
     }
 
     temp = {}

@@ -6,6 +6,7 @@ class TSProblem():
   def __init__(self, name, cities_mx=[]):
     self._cities = cities_mx
     self.name = name
+    self.size = len(cities_mx)
 
   def get_cities(self):
     return self._cities

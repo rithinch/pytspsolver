@@ -11,7 +11,6 @@ class Visualizer():
   def __get_n_vs_time_data(self, solverName, epoch=-1):
 
     filtered_results = {}
-
     for epoch in self._results:
       results = self._results[epoch]
       x = []
@@ -19,10 +18,36 @@ class Visualizer():
       for prob in results:
         if solverName in results[prob]:
           result = results[prob][solverName]
-          x.append(len(result['best_path'])-1)
-          y.append(result['time'])
+          size = len(result['best_path'])-1
+          time = result['time']
+          x.append(size)
+          y.append(time)
         
-      filtered_results[epoch] = [x,y]
+      d = {}
+      new_x, new_y = [], []
+
+      for i in range(len(x)):
+        if x[i] in d:
+          d[x[i]][0]+=1
+          d[x[i]][1].append(i)
+        else:
+          d[x[i]]=[1,[i]]
+      
+      for i in range(len(x)):
+
+        new_x.append(x[i])
+
+        avg1 = y[i]
+
+        if d[size][0] > 1:
+
+          for j in d[size][1]:
+            avg1+= y[j]
+          avg1 = avg1/d[size][0]
+
+        new_y.append(avg1)
+
+      filtered_results[epoch] = [new_x,new_y]
     
     if epoch>-1:
       data_points = filtered_results[epoch]
