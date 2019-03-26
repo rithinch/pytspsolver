@@ -32,20 +32,23 @@ class Visualizer():
           d[x[i]][1].append(i)
         else:
           d[x[i]]=[1,[i]]
-      
+      added = set()
+
       for i in range(len(x)):
-
-        new_x.append(x[i])
-
-        avg1 = y[i]
-
+        size = x[i]
+        if size in added:
+          continue
+        avg1 = 0
         if d[size][0] > 1:
-
           for j in d[size][1]:
             avg1+= y[j]
           avg1 = avg1/d[size][0]
-
+        else:
+          avg1 = y[i]
+        
+        new_x.append(size)
         new_y.append(avg1)
+        added.add(size)
 
       filtered_results[epoch] = [new_x,new_y]
     
