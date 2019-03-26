@@ -48,6 +48,7 @@ visualizer = Visualizer(results)
 
 #visualizer.plot_n_vs_time(plt, greedy_search._name)
 #visualizer.plot_n_vs_time(plt, exhaustive_search._name)
+visualizer.n_vs_time_all_table()
 
 visualizer.plot_n_vs_time_all(plt)
 visualizer.plot_time_vs_cost_all(plt, 'Prob_Sym_40')

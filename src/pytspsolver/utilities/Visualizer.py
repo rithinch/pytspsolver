@@ -1,4 +1,6 @@
 import numpy as np
+from tabulate import tabulate
+import pandas as pd
 
 class Visualizer():
 
@@ -7,7 +9,6 @@ class Visualizer():
     self.__run_details = results['details']
     self._results = results['epochs']
   
-
   def __get_n_vs_time_data(self, solverName, epoch=-1):
 
     filtered_results = {}
@@ -59,7 +60,6 @@ class Visualizer():
       data_points = [filtered_results[0][0], list(avg_y_values)]
     
     return data_points
-  
 
   def __get_time_vs_cost_data(self, problemName, solverName, epoch=-1):
 
@@ -75,7 +75,6 @@ class Visualizer():
     
     return datapoints
 
-  
   def __get_solver_vs_cost_data(self, problemName, epoch=-1):
     data = []
 
@@ -91,7 +90,6 @@ class Visualizer():
     
     return datapoints
 
-  
   def __get_problem_vs_cost_data(self, epoch=-1):
 
     data = []
@@ -260,4 +258,25 @@ class Visualizer():
 
     plt.show()
 
+  def n_vs_time_all_table(self, epoch=-1):
+    
+    data_points = {}
+
+    for solverName in self.__run_details['solver_names']:
+
+      data_points[solverName] = self.__get_n_vs_time_data(solverName, epoch=epoch)
+    
+    n = None
+    d = {}
+
+    for solverName in self.__run_details['solver_names']:
+      if n==None:
+        n = data_points[solverName][0]
+        d["Problem Size"] = n
+        
+      d[solverName] = data_points[solverName][1]
+    
+    df = pd.DataFrame(d)
+
+    print(tabulate(df, headers='keys', tablefmt='psql', showindex=False))
     
