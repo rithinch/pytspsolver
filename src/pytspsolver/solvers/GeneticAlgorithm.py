@@ -100,7 +100,7 @@ class GeneticAlgorithm(SolverBase):
         return nextGeneration
 
     def __rank_population(self, mx, population):
-        return sorted(population, key=lambda x: self.__calc_fitness(mx, x), reverse=True)
+        return sorted(population, key=lambda x: self.__cost(mx, x))
 
     def __roulette_wheel_selection(self, mx, population):
         """
@@ -116,7 +116,7 @@ class GeneticAlgorithm(SolverBase):
 
         selectedPop = []
 
-        total_fitness = sum([self.__calc_fitness(mx,sol) for sol in population])
+        total_fitness = sum([self.__cost(mx,sol) for sol in population])
 
         while len(selectedPop) < (self.__population_size):
 
@@ -127,13 +127,13 @@ class GeneticAlgorithm(SolverBase):
             curr2 = 0
             
             for sol in population:
-                curr1+= self.__calc_fitness(mx,sol)
+                curr1+= self.__cost(mx,sol)
                 if curr1 > pick1:
                     parent1 = sol
                     break
 
             for sol in population:
-                curr2+=self.__calc_fitness(mx,sol)
+                curr2+=self.__cost(mx,sol)
                 if curr2 > pick2:
                     parent2 = sol
                     break
