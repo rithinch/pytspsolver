@@ -55,13 +55,13 @@ class GeneticAlgorithm(SolverBase):
         return population
     
     def __crossover(self, parent1, parent2):
-
+        start = [parent1[0]]
         child = []
         childP1 = []
         childP2 = []
 
-        geneA = int(random.random() * len(parent1))
-        geneB = int(random.random() * len(parent1))
+        geneA = random.randint(1,len(parent1)-1)
+        geneB = random.randint(1,len(parent1)-1)
     
         startGene = min(geneA, geneB)
         endGene = max(geneA, geneB)
@@ -71,7 +71,7 @@ class GeneticAlgorithm(SolverBase):
         
         childP2 = [item for item in parent2 if item not in childP1]
 
-        child = childP1 + childP2
+        child = start + childP1 + childP2
         return child
     
     def __get_best(self, mx, population):
@@ -181,10 +181,10 @@ class GeneticAlgorithm(SolverBase):
 
     def __swap_mutation(self,individual):
 
-        for swapped in range(len(individual)):
+        for swapped in range(1,len(individual)):
 
             if(random.random() < self.__mutation_rate):
-                swapWith = int(random.random() * len(individual))
+                swapWith = random.randint(1,len(individual)-1)
                 
                 city1 = individual[swapped]
                 city2 = individual[swapWith]
