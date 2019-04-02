@@ -2,4 +2,6 @@
 jupyter-notebooks/.ipynb_checkpoints
 .vscode
 src/.pytest_cache
+datasets
+load_datasets.py
 
