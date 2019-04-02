@@ -12,7 +12,7 @@ class TSProblem():
     return self._cities
   
   def get_details(self):
-    pass
+    return self.name
 
   def visualize(self, plt, show=True):
     G = nx.from_numpy_matrix((np.array(self._cities)))

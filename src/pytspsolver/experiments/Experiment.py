@@ -4,6 +4,7 @@ class Experiment():
     self._results = {}
     self._problems = problems if problems != None else []
     self._solvers = solvers if solvers != None else []
+    self.__invalid_solutions = []
 
   def add_problem(self, problem):
     self._problems.append(problem)
@@ -20,6 +21,12 @@ class Experiment():
   def get_solver_names(self):
     return [i._name for i in self._solvers]
   
+  def get_invalid_solutions(self):
+    return self.__invalid_solutions
+  
+  def has_any_invalid_solutions(self):
+    return len(self.__invalid_solutions) > 0
+  
   def get_problem_sizes(self):
     
     d = {}
@@ -31,8 +38,14 @@ class Experiment():
 
   def get_results(self):
     return self._results
+  
+
+  def verify_path(self, path):
+    return len(path) == len(set(path)) + 1
 
   def run(self, epoch=5):
+
+    self.__invalid_solutions = []
 
     self._problems = sorted(self._problems, key=lambda x: len(x._cities))
 
@@ -45,6 +58,7 @@ class Experiment():
     }
 
     temp = {}
+    
 
     for e in range(epoch):
 
@@ -58,7 +72,10 @@ class Experiment():
 
           result = solver.run(problem)
 
-          temp[e][problem.name][solver._name] = result
+          if self.verify_path(result['best_path']):
+            temp[e][problem.name][solver._name] = result
+          else:
+            self.__invalid_solutions.append(result)
     
     self._results['epochs'] = temp
 

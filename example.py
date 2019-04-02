@@ -42,7 +42,11 @@ experiment.add_solver(genetic_algorithm2)
 # experiment.add_solver(genetic_algorithm3)
 
 # Run the experiment desired number of times
-experiment.run(epoch=1) 
+experiment.run(epoch=1)
+
+if experiment.has_any_invalid_solutions():
+    print(experiment.get_invalid_solutions())
+    
 results = experiment.get_results()
 
 # Set up Visualizer with experiment results

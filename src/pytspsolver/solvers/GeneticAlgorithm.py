@@ -61,7 +61,7 @@ class GeneticAlgorithm(SolverBase):
         best_path = self.__rank_population(mx, population)[0]
         best_cost = self.__cost(mx, best_path)
 
-        return best_path, best_cost
+        return best_path+[0], best_cost
     
     def __mutatePopulation(self, population):
 
