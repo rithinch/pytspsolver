@@ -143,8 +143,10 @@ class GeneticAlgorithm(SolverBase):
 
         return selectedPop
    
-    def run(self, tsp_problem):
+    def run(self, tsp_problem, reset_cache=True):
 
+        if reset_cache:
+            self.__cost_cache = {}
         best_path, best_cost, elapsed, time_cost = self.__solve(tsp_problem.get_cities())
 
         result = {
