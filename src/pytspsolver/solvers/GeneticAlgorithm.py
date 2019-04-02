@@ -10,7 +10,7 @@ class GeneticAlgorithm(SolverBase):
         self.__mutation_rate = mutation_rate
         self.__population_size = population_size
         self.__elite_size = elite_size
-        self.__crossover = self.__ordered_crossover if selection_operator == 'ordered' else self.__two_point_crossover
+        self.__crossover = self.__ordered_crossover if crossover_operator == 'ordered' else self.__two_point_crossover
         self.__selection = self.__roulette_wheel_selection if selection_operator == 'roulette' else self.__tournament_selection
         self.__cost_cache = {}
 
