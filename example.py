@@ -25,7 +25,7 @@ problem3 = create_random_problem("Prob_Sym_100",100)
 exhaustive_search = ExhaustiveSearch(time_limit=50)
 greedy_search = GreedySearch()
 genetic_algorithm1 = GeneticAlgorithm(generations=1000, mutation_rate=0.05, population_size=200, elite_size=20, selection_operator='tournament')
-genetic_algorithm2 = GeneticAlgorithm(name="GA2", generations=2000, mutation_rate=0.00005, population_size=200, elite_size=20, selection_operator='tournament')
+genetic_algorithm2 = GeneticAlgorithm(name="GA2", generations=1000, mutation_rate=0.01, population_size=200, elite_size=20, selection_operator='tournament')
 genetic_algorithm3 = GeneticAlgorithm(name="GA Roulette", generations=1000, mutation_rate=0.01, population_size=200, elite_size=20, selection_operator='roulette')
 # Create Experiment
 experiment = Experiment()
