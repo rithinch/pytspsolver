@@ -4,13 +4,13 @@ import random
 
 class GeneticAlgorithm(SolverBase):
 
-    def __init__(self, name="Genetic Algorithm", generations=500, mutation_rate=0.05, population_size=100, elite_size=20, selection_operator='roulette'):
+    def __init__(self, name="Genetic Algorithm", generations=500, mutation_rate=0.05, population_size=100, elite_size=20, selection_operator='roulette', crossover_operator='ordered'):
         super().__init__(name)
         self.__generations = generations
         self.__mutation_rate = mutation_rate
         self.__population_size = population_size
         self.__elite_size = elite_size
-
+        self.__crossover = self.__ordered_crossover if selection_operator == 'ordered' else self.__two_point_crossover
         self.__selection = self.__roulette_wheel_selection if selection_operator == 'roulette' else self.__tournament_selection
         self.__cost_cache = {}
 
@@ -19,8 +19,10 @@ class GeneticAlgorithm(SolverBase):
         children = []
         
         for parent1, parent2 in parents:
-            child = self.__crossover(parent1, parent2)
-            children.append(child)
+            child1 = self.__crossover(parent1, parent2)
+            child2 = self.__crossover(parent2, parent1)
+            children.append(child1)
+            children.append(child2)
         
         return children
 
@@ -49,30 +51,10 @@ class GeneticAlgorithm(SolverBase):
 
         for i in range(self.__population_size):
 
-            pop = [0] + random.sample(range(1, prob_size), prob_size-1) + [0]
+            pop = [0] + random.sample(range(1, prob_size), prob_size-1)
             population.append(pop)
 
         return population
-    
-    def __crossover(self, parent1, parent2):
-        start = [parent1[0]]
-        child = []
-        childP1 = start
-        childP2 = []
-
-        geneA = random.randint(1,len(parent1)-1)
-        geneB = random.randint(1,len(parent1)-1)
-    
-        startGene = min(geneA, geneB)
-        endGene = max(geneA, geneB)
-
-        for i in range(startGene, endGene):
-            childP1.append(parent1[i])
-        
-        childP2 = [item for item in parent2 if item not in childP1]
-
-        child = childP1 + childP2
-        return child
     
     def __get_best(self, mx, population):
         
@@ -98,6 +80,46 @@ class GeneticAlgorithm(SolverBase):
         newPopulation =  self.__rank_population(mx, children)[:self.__population_size - self.__elite_size]
         nextGeneration = popRanked[:self.__elite_size] + self.__mutatePopulation(newPopulation)
         return nextGeneration
+
+
+    def __ordered_crossover(self, parent1, parent2):
+        """Implements ordered crossover"""
+
+        size = len(parent1)
+
+        # Choose random start/end position for crossover
+        child = [-1] * size
+        start, end = sorted([random.randrange(1, size, 1) for _ in range(2)])
+
+        # Replicate mum's sequence for alice, dad's sequence for bob
+        child_inherited = set()
+        for i in range(start, end + 1):
+            child[i] = parent1[i]
+            child_inherited.add(parent1[i])
+
+        #Fill the remaining position with the other parents' entries
+        current_dad_position = 0
+
+        fixed_pos = set(range(start, end + 1))       
+        i = 0
+        while i < size:
+            if i in fixed_pos:
+                i += 1
+                continue
+
+            test_child = child[i]
+            if test_child==-1: #to be filled
+                dad_trait = parent2[current_dad_position]
+                while dad_trait in child_inherited:
+                    current_dad_position += 1
+                    dad_trait = parent2[current_dad_position]
+                child[i] = dad_trait
+                child_inherited.add(dad_trait)
+            
+
+            i +=1
+
+        return child
 
     def __rank_population(self, mx, population):
         return sorted(population, key=lambda x: self.__cost(mx, x))
@@ -235,4 +257,24 @@ class GeneticAlgorithm(SolverBase):
             selectedPop.append([parent1,parent2])
 
         return selectedPop
+    
+    def __two_point_crossover(self, parent1, parent2):
+        start = [parent1[0]]
+        child = []
+        childP1 = start
+        childP2 = []
+
+        geneA = random.randint(1,len(parent1)-1)
+        geneB = random.randint(1,len(parent1)-1)
+    
+        startGene = min(geneA, geneB)
+        endGene = max(geneA, geneB)
+
+        for i in range(startGene, endGene):
+            childP1.append(parent1[i])
+        
+        childP2 = [item for item in parent2 if item not in childP1]
+
+        child = childP1 + childP2
+        return child
 
