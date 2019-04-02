@@ -57,7 +57,7 @@ class GeneticAlgorithm(SolverBase):
     def __crossover(self, parent1, parent2):
         start = [parent1[0]]
         child = []
-        childP1 = []
+        childP1 = start
         childP2 = []
 
         geneA = random.randint(1,len(parent1)-1)
@@ -71,7 +71,7 @@ class GeneticAlgorithm(SolverBase):
         
         childP2 = [item for item in parent2 if item not in childP1]
 
-        child = start + childP1 + childP2
+        child = childP1 + childP2
         return child
     
     def __get_best(self, mx, population):
