@@ -280,3 +280,31 @@ class Visualizer():
 
     print(tabulate(df, headers='keys', tablefmt='psql', showindex=False))
     
+  def plot_problem_vs_cost_line_all(self, plt, epoch=-1):
+    
+      datapoints = self.__get_problem_vs_cost_data(epoch=epoch)
+      problem_names = datapoints[0]
+      solver_names = datapoints[1]
+      solver_results = datapoints[2]
+      print(solver_results)
+      a = list(map(int, problem_names))
+      
+      fig, ax = plt.subplots()
+
+      ax.set_ylabel('Cost')
+      ax.set_xlabel('Problems')
+      ax.set_title('Cost Comparision - All Solvers and Problems')
+      #ax.set_xticklabels(a)
+
+      legend = []
+      for solver in solver_names:
+        legend.append(solver)
+
+      for i in range(len(solver_names)):
+        
+        plt.plot(a, solver_results[i], 'o-')
+
+      plt.legend(legend)
+      #plt.xlim(0, 30)
+      #plt.ylim(0,1000)
+      plt.show()
