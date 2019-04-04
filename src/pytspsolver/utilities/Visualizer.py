@@ -207,7 +207,7 @@ class Visualizer():
       for x,y in [(init_x, init_y), (min_x, min_y)]:
         plt.plot(x, y, 'o')
         
-        plt.text(x-(0.05*x), y+(0.05*y),point_label.format(x, y), color='blue', va='center')
+        #plt.text(x-(0.05*x), y+(0.05*y),point_label.format(x, y), color='blue', va='center')
 
       if init_y > ylim:
         ylim = init_y

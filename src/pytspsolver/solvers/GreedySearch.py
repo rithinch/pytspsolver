@@ -1,4 +1,4 @@
-from time import time, clock
+from time import process_time
 from math import inf as oo
 from .SolverBase import SolverBase
 
@@ -37,7 +37,7 @@ class GreedySearch(SolverBase):
         elapsed = 0
         time_cost = []
 
-        t = clock()
+        t = process_time()
 
         path = [city_names[0]] # Start at city 0
 
@@ -70,11 +70,11 @@ class GreedySearch(SolverBase):
             path.append(next_city)
             cost += next_city_cost
 
-            elapsed = clock() - t # Record time taken
+            elapsed = process_time() - t # Record time taken
             time_cost.append((elapsed, cost))
 
         cost+=mx[path[-1]][0] #Add cost to go back
-        elapsed = clock() - t # Record time taken
+        elapsed = process_time() - t # Record time taken
         time_cost.append((elapsed, cost))
         
         path.append(city_names[0]) # Add starting city to end as well

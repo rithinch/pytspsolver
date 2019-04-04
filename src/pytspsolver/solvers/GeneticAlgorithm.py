@@ -1,5 +1,5 @@
 from .SolverBase import SolverBase
-from time import time, clock
+from time import process_time
 import random
 
 class GeneticAlgorithm(SolverBase):
@@ -189,7 +189,7 @@ class GeneticAlgorithm(SolverBase):
 
         population = self.__create_initial_population(len(cities_mx))
         
-        t = clock()
+        t = process_time()
 
         while (generation < self.__generations):
             
@@ -198,7 +198,7 @@ class GeneticAlgorithm(SolverBase):
             
             best_path, best_cost = self.__get_best(cities_mx, population)
 
-            elapsed = clock() - t
+            elapsed = process_time() - t
             time_cost.append((elapsed, best_cost))
 
         return best_path, best_cost, elapsed, time_cost
