@@ -1,6 +1,6 @@
 from itertools import permutations
 from math import inf as oo
-from time import time
+from time import clock
 from .SolverBase import SolverBase
 
 class ExhaustiveSearch(SolverBase):
@@ -44,7 +44,7 @@ class ExhaustiveSearch(SolverBase):
     elapsed = 0
     time_cost = []
 
-    t = time()
+    t = clock()
 
     for path in permutations(city_names[1:]):
 
@@ -55,7 +55,7 @@ class ExhaustiveSearch(SolverBase):
           best_cost = c
           best_path = [0]+path+[0]
       
-      elapsed = time() - t
+      elapsed = clock() - t
 
       time_cost.append((elapsed, best_cost))
 

@@ -4,4 +4,5 @@ jupyter-notebooks/.ipynb_checkpoints
 src/.pytest_cache
 datasets
 load_datasets.py
+notebooks
 
