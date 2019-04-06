@@ -4,7 +4,7 @@ Easy to use package for rapid experimentation on the classic travelling salesman
 
 [![Build Status](https://dev.azure.com/rithinchalumuri/pytspsolver/_apis/build/status/pytspsolver-CI?branchName=master)](https://dev.azure.com/rithinchalumuri/pytspsolver/_build/latest?definitionId=7&branchName=master)
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/rithinch)
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)]()
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
@@ -22,20 +22,24 @@ Easy to use package for rapid experimentation on the classic travelling salesman
  
  Here's how you can kick-start a travelling salesman problem experiment:
  
- ```python
+```python
 from pytspsolver.entities import TSProblem
 from pytspsolver.experiments import Experiment
 from pytspsolver.solvers import *
-from pytspsolver.utilities import create_random_problem, Visualizer
+from pytspsolver.utilities import create_random_problem, get_tsp_lib_problem, Visualizer
 import matplotlib.pyplot as plt
 
 # Create a few tsp problems (represented as an adjacency matrix)
 problems = [create_random_problem("UniqueProblemName"+str(i), i) for i in range(3,12)]
 
+# Pass in the location of TSPLIB95 dataset file
+tsp_prob = get_tsp_lib_problem("gr17.tsp")
+
 # Create a new Experiment
 experiment = Experiment()
 
 # Add the problems to the experiment (single or list of problems)
+experiment.add_problem(tsp_prob)
 experiment.add_problems(problems)
 
 # Add solvers to use in the experiment
@@ -52,9 +56,9 @@ visualizer = Visualizer(results)
 visualizer.plot_n_vs_time_all(plt)
 
 # Note: the visualizer has various plots available, they can be called in a similar fashion.
- ```
+```
  
- It comes with a plug in architecture, therefore it is very customizable.
+It comes with a plug in architecture, therefore it is very customizable.
 
 ##  Local Setup (Development Purposes)
 

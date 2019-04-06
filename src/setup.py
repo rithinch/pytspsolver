@@ -9,7 +9,7 @@ REQUIRED_PKGS = ["numpy", "matplotlib", "networkx", "tsplib95"]
 AUTHOR = 'Rithin Chalumuri'
 AUTHOR_EMAIL = 'rithinch@gmail.com'
 KEYWORDS = ['tsp', 'optimization-experiments', 'python']
-DESCRIPTION = 'Python package for rapid experimentation on travelling salesman problem'
+DESCRIPTION = 'Easy to use python package for rapid experimentation on the classic travelling salesman problem.'
 
 CLASSIFIERS = [
     'Development Status :: 3 - Alpha',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
