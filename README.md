@@ -3,7 +3,7 @@
 Easy to use package for rapid experimentation on the classic travelling salesman problem. Contains implementations of various optimization algorithms, cool visualizers and a plug-in architecture.
 
 [![Build Status](https://dev.azure.com/rithinchalumuri/pytspsolver/_apis/build/status/pytspsolver-CI?branchName=master)](https://dev.azure.com/rithinchalumuri/pytspsolver/_build/latest?definitionId=7&branchName=master)
-[!PyPI(https://img.shields.io/pypi/v/pytspsolver.svg)](https://pypi.org/project/pytspsolver/)
+[![PyPI](https://img.shields.io/pypi/v/pytspsolver.svg)](https://pypi.org/project/pytspsolver/)
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/rithinch)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)]
 
