@@ -3,11 +3,12 @@ import numpy as np
 
 class TSProblem():
   
-  def __init__(self, name, cities_mx=[]):
+  def __init__(self, name, cities_mx=[], optimal=-1):
     self._cities = cities_mx
     self.name = name
     self.size = len(cities_mx)
-
+    self.optimal = -1
+    
   def get_cities(self):
     return self._cities
   

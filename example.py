@@ -1,7 +1,7 @@
 from pytspsolver.entities import TSProblem
 from pytspsolver.experiments import Experiment
 from pytspsolver.solvers import *
-from pytspsolver.utilities import create_random_problem, Visualizer
+from pytspsolver.utilities import create_random_problem, get_tsp_lib_problem, Visualizer
 
 import matplotlib
 matplotlib.use("TkAgg")
@@ -10,7 +10,9 @@ import matplotlib.pyplot as plt
 # Create the problems
 #problem1 = create_random_problem("TestProb",3)
 #problem2 = create_random_problem(4) 
-problem3 = create_random_problem("Prob_Sym_100",100)  
+#problem3 = create_random_problem("Prob_Sym_100",100)  
+
+tsp_prob = get_tsp_lib_problem("gr17.tsp", "notebooks/datasets")
 
 #problem3.visualize(plt)
 
@@ -25,12 +27,12 @@ problem3 = create_random_problem("Prob_Sym_100",100)
 exhaustive_search = ExhaustiveSearch(time_limit=50)
 greedy_search = GreedySearch()
 genetic_algorithm1 = GeneticAlgorithm(generations=1000, mutation_rate=0.05, population_size=200, elite_size=20, selection_operator='tournament')
-genetic_algorithm2 = GeneticAlgorithm(name="GA2", generations=1000, mutation_rate=0.01, population_size=200, elite_size=20, selection_operator='tournament')
+genetic_algorithm2 = GeneticAlgorithm(name="GA2", generations=1000, mutation_rate=0.001, population_size=100, elite_size=10, selection_operator='tournament')
 genetic_algorithm3 = GeneticAlgorithm(name="GA Roulette", generations=1000, mutation_rate=0.01, population_size=200, elite_size=20, selection_operator='roulette')
 # Create Experiment
 experiment = Experiment()
 
-experiment.add_problem(problem3)
+experiment.add_problem(tsp_prob)
 #experiment.add_problems(symeteric_problems)
 #experiment.add_problems(asymeteric_problems)
 
@@ -59,7 +61,7 @@ visualizer = Visualizer(results)
 # visualizer.n_vs_time_all_table()
 
 visualizer.plot_n_vs_time_all(plt)
-visualizer.plot_time_vs_cost_all(plt, 'Prob_Sym_100')
+visualizer.plot_time_vs_cost_all(plt, "gr17.tsp")
 # visualizer.plot_time_vs_cost(plt, genetic_algorithm2._name, 'Prob_Sym_40')
 # visualizer.plot_solver_vs_cost(plt, 'Prob_Sym_40')
 visualizer.plot_problem_vs_cost_all(plt)

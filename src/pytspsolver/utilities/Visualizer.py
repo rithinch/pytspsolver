@@ -279,6 +279,33 @@ class Visualizer():
     df = pd.DataFrame(d)
 
     print(tabulate(df, headers='keys', tablefmt='psql', showindex=False))
+
+  
+  def n_vs_accuracy_all_table(self, epoch=-1):
+    
+    data_points = {}
+
+    datapoints = self.__get_problem_vs_cost_data(epoch=epoch)
+    problem_names = datapoints[0]
+    solver_names = datapoints[1]
+    solver_results = datapoints[2]
+    
+    n = None
+    d = {}
+
+    
+    for i in range(len(solver_names)):
+        if n==None:
+          x = self.__get_n_vs_time_data(solver_names[i], epoch=epoch)
+          d["Problem Size"] = x[0]
+
+        d[solver_names[i]] = solver_results[i]
+    
+
+    d["Optimal Cost"] = [2085, 2707, 1272, 5046, 6942, 21407, 48450, 92650]
+    df = pd.DataFrame(d)
+
+    print(tabulate(df, headers='keys', tablefmt='psql', showindex=False))
     
   def plot_problem_vs_cost_line_all(self, plt, epoch=-1):
     
@@ -286,7 +313,7 @@ class Visualizer():
       problem_names = datapoints[0]
       solver_names = datapoints[1]
       solver_results = datapoints[2]
-      print(solver_results)
+      
       a = list(map(int, problem_names))
       
       fig, ax = plt.subplots()
