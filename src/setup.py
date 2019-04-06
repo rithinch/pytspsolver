@@ -28,6 +28,5 @@ setup (
         author=AUTHOR,
         url = URL,
         keywords = KEYWORDS,
-        classifiers = CLASSIFIERS,
         description= DESCRIPTION
 )
