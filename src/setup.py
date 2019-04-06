@@ -1,6 +1,7 @@
 from setuptools import setup, find_packages
-
+import os
 import pytspsolver
+import io
 
 URL = 'https://github.com/rithinch/pytspsolver'
 REQUIRES_PYTHON = ">=3.6.0"
@@ -18,6 +19,18 @@ CLASSIFIERS = [
     'Programming Language :: Python :: 3.6',
   ]
 
+
+here = os.path.abspath(os.path.dirname(__file__))
+
+# Import the README and use it as the long-description.
+# Note: this will only work if 'README.md' is present in your MANIFEST.in file!
+try:
+    with io.open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
+        long_description = '\n' + f.read()
+except FileNotFoundError:
+    long_description = DESCRIPTION
+
+
 setup (
         name = pytspsolver.__name__,
         version = pytspsolver.__version__,
@@ -28,5 +41,7 @@ setup (
         author=AUTHOR,
         url = URL,
         keywords = KEYWORDS,
-        description= DESCRIPTION
+        description= DESCRIPTION,
+        long_description=long_description,
+        long_description_content_type='text/markdown'
 )

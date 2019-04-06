@@ -5,4 +5,4 @@ from . import experiments
 
 __all__ = [ 'entities','solvers','utilities', 'experiments']
 __title__ = 'pytspsolver'
-__version__ = '0.0.6'
+__version__ = '0.0.7'
