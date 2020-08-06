@@ -4,6 +4,7 @@ Easy to use package for rapid experimentation on the classic travelling salesman
 
 [![Build Status](https://dev.azure.com/rithinchalumuri/pytspsolver/_apis/build/status/pytspsolver-CI?branchName=master)](https://dev.azure.com/rithinchalumuri/pytspsolver/_build/latest?definitionId=7&branchName=master)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=rithinch_pytspsolver&metric=alert_status)](https://sonarcloud.io/dashboard?id=rithinch_pytspsolver)
+[![Known Vulnerabilities](https://snyk.io/test/github/rithinch/pytspsolver/badge.svg?targetFile=src/requirements.txt)](https://snyk.io/test/github/rithinch/pytspsolver?targetFile=src/requirements.txt)
 [![PyPI](https://img.shields.io/pypi/v/pytspsolver.svg)](https://pypi.org/project/pytspsolver/)
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/rithinch)
 ![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)
